@@ -1,0 +1,30 @@
+<mat-tab-group mat-stretch-tabs class="mat-elevation-z0">
+    <mat-tab label="Playground">
+        <mat-card>
+            <div class="card-container">
+                <mat-card class="template-card">
+                    <mat-card-title>Template</mat-card-title>
+                    <mat-card-content [innerHTML]="data" contenteditable="true"></mat-card-content>
+                    <mat-card-actions align="end">
+                        <button mat-raised-button matTooltip="" color="primary">SAVE</button>
+                        <button mat-raised-button matTooltip="" color="accent">PREVIEW</button>
+                    </mat-card-actions>
+                </mat-card>
+                <mat-card class="tags-card">
+                    <mat-card-title>Tags</mat-card-title>
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item *ngFor="let tag of tags">
+                                <button mat-raised-button color="primary">{{tag}}</button>
+                                <mat-divider></mat-divider>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>  
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Preview">
+        <mat-card>Preview</mat-card>
+    </mat-tab> 
+</mat-tab-group>
