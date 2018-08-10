@@ -1,0 +1,3 @@
+Highlight elements on mouse over and on Drag event
+    split highlighted element into characters within spans and keep track of the element ( spans ) hovered
+    on drop call a method to update the content

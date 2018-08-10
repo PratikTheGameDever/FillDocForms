@@ -16,11 +16,11 @@ export class AppComponent implements OnInit{
     'First Name',
     'Last Name',
     'Title',
-    'Org. Addr.',
+    'Org. Name & Addr.',
     'Sender Name',
     'Sender Signature'
   ];
-
+  droppedData: string;
   constructor(private service: DataService){}
 
   ngOnInit(){
@@ -34,6 +34,10 @@ export class AppComponent implements OnInit{
     docEle.innerHTML = data;
     
     return docEle.getElementsByClassName('3DWordSection1')[0].innerHTML;
+  }
+
+  onItemDrop(event) {
+    console.log('Element was dragged', event, this.droppedData);
   }
 
 

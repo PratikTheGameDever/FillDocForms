@@ -4,7 +4,8 @@
                 <div class="card-container">
                     <mat-card class="template-card">
                         <mat-card-title>Template</mat-card-title>
-                        <mat-card-content [innerHTML]="data" contenteditable="true"></mat-card-content>
+                        <mat-card-content [innerHTML]="data" droppable contenteditable="true"
+                        (onDrop)="onItemDrop($event)" [dropScope]="'default-css'"></mat-card-content>
                         <mat-card-actions align="end">
                             <button mat-raised-button matTooltip="Click to save Updated Template" color="primary">SAVE</button>
                             <button mat-raised-button matTooltip="Click to Preview Updated Template" color="accent">PREVIEW</button>
@@ -15,7 +16,7 @@
                         <mat-card-content>
                             <mat-list>
                                 <mat-list-item *ngFor="let tag of tags">
-                                    <button mat-raised-button color="primary">{{tag}}</button>
+                                    <button draggable [dragScope]="'default-css'" mat-raised-button color="primary">{{tag}}</button>
                                     <mat-divider></mat-divider>
                                 </mat-list-item>
                             </mat-list>
