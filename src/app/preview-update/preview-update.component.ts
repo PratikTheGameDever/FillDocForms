@@ -1,14 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from '../services/data-service';
+import { DataService } from '../../services/data-service';
+import { NgForm } from '@angular/forms';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-preview-update',
+  templateUrl: './preview-update.component.html',
+  styleUrls: ['./preview-update.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'app';
-  @ViewChild('docEle') docEleTpl: ElementRef;
+export class PreviewUpdateComponent implements OnInit {
+  @ViewChild('form') ngForm: NgForm;
+  @ViewChild('docEle') templateEle: ElementRef;
   data = '';
+  docEle: HTMLDivElement;
   tags = [
     {key: 'staddr', title: 'St. Address', tag: '<span id="staddr">@@St.Addr.@@</span>', type: 'text', value: ''},
     {key: 'city', title: 'City', tag: '<span id="city">@@city@@</span>', type: 'select',
@@ -35,13 +38,20 @@ export class AppComponent implements OnInit{
     {key: 'title', title : 'Title', tag: '<span id="title">@@Title@@</span>', type: 'text', value: ''},
     {key: 'para', title : 'Paragraph', tag: '< span id="para">@@Paragraph@@</span>', type: 'textarea', value: ''}
   ];
-  docEle: HTMLDivElement;
-  selectedTab: number = 1;
-  constructor(private service: DataService){}
 
-  ngOnInit(){
-    this.service.get('http://localhost:3000/api/data').subscribe( data=> {
-      this.data = this.trimDocData(data);
+  constructor(private service: DataService) { }
+
+  ngOnInit() {
+    this.service.get('http://localhost:3000/api/data/template').subscribe( data=> {
+      this.templateEle.nativeElement.innerHTML = this.trimDocData(data);
+    })
+    this.ngForm.form.valueChanges.subscribe(x => {
+      this.tags.forEach(tag => {
+        let ele = window.document.getElementById(tag.key);
+        if(ele !== undefined && ele !== null){
+          ele.innerHTML = x[tag.key] || ele.innerHTML;
+        }
+      });
     })
   }
 
@@ -51,26 +61,4 @@ export class AppComponent implements OnInit{
     return this.docEle.getElementsByClassName('3DWordSection1')[0].innerHTML;
   }
 
-  onItemDrop(event) {
-    // console.log('Element was dragged', event.dragData);
-    // console.log('co-ordinates : ', event.nativeEvent.clientX, ' , ', event.nativeEvent.clientY);
-    // console.log(event.dragData, ' dropped on ', event.nativeEvent.target);
-    event.nativeEvent.target.innerHTML = event.dragData.tag;
-  }
-
-  save() : void{
-    this.docEle.getElementsByClassName('3DWordSection1')[0].innerHTML = this.docEleTpl.nativeElement.innerHTML;
-    this.service.post(this.docEle.outerHTML).subscribe( res => {
-      console.log(res);
-    })
-  }
-
-  saveAndPreview() : void {
-    this.save();
-    this.switchToPreview()
-  }
-
-  switchToPreview(){
-    this.selectedTab = 1;
-  }
 }

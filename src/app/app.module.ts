@@ -11,10 +11,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from '../services/data-service';
 import { AppComponent } from './app.component';
 import { NgDragDropModule } from 'ng-drag-drop';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { PreviewUpdateComponent } from './preview-update/preview-update.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PreviewUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,10 @@ import { NgDragDropModule } from 'ng-drag-drop';
     MatListModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    MatInputModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

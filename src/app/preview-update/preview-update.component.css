@@ -1,0 +1,14 @@
+.template-card{
+    min-width: 40%;
+    max-width: 40%;
+    float: left;
+}
+.tags-card{
+    min-width: 50%;
+    max-width: 50%;
+    float: right;
+}
+.card-container{
+    display: flex;
+    flex-flow: row wrap;
+}

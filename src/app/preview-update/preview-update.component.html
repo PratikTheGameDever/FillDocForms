@@ -1,0 +1,36 @@
+<div class="card-container">
+  <mat-card class="template-card">
+    <mat-card-title>Template</mat-card-title>
+    <mat-card-content #docEle [innerHTML]="data"></mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button matTooltip="Click to save Updated Template" color="primary">SAVE</button>
+      <button mat-raised-button matTooltip="Click to Preview Updated Template" color="accent">PREVIEW</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="tags-card">
+    <mat-card-title>Controls</mat-card-title>
+    <form #form="ngForm">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let tag of tags">
+            <div [ngSwitch]="tag.type">
+              <mat-form-field>
+                <input *ngSwitchCase="'text'" [name]="tag.key"
+                 matInput [placeholder]="tag.title" [(ngModel)]="tag.value">
+                <mat-select [(ngModel)]="tag.value" *ngSwitchCase="'select'" 
+                [placeholder]="tag.title" [name]="tag.key">
+                  <mat-option *ngFor="let opt of tag.options" [value]="opt">
+                    {{opt}}
+                  </mat-option>
+                </mat-select>
+                <textarea [(ngModel)]="tag.value" 
+                [name]="tag.key"
+                class='full-width-control' *ngSwitchCase="'textarea'" matInput [placeholder]="tag.title"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

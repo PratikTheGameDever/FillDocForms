@@ -7,7 +7,11 @@ import { text } from '../../node_modules/@angular/core/src/render3/instructions'
 export class DataService{
     constructor(private _http: HttpClient){}
 
-    getData(): Observable<any> {
-        return this._http.get('http://localhost:3000/api/data', {responseType: 'text'});
+    get(url: string): Observable<any> {
+        return this._http.get(url , {responseType: 'text'});
+    }
+
+    post(data: string): Observable<any> {
+        return this._http.post('http://localhost:3000/api/data', {body : data});
     }
 }
