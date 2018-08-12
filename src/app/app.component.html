@@ -1,31 +1,40 @@
-<mat-tab-group mat-stretch-tabs class="mat-elevation-z0">
-        <mat-tab label="Playground">
-            <mat-card>
-                <div class="card-container">
-                    <mat-card class="template-card">
-                        <mat-card-title>Template</mat-card-title>
-                        <mat-card-content [innerHTML]="data" droppable contenteditable="true"
-                        (onDrop)="onItemDrop($event)" [dropScope]="'default-css'"></mat-card-content>
-                        <mat-card-actions align="end">
-                            <button mat-raised-button matTooltip="Click to save Updated Template" color="primary">SAVE</button>
-                            <button mat-raised-button matTooltip="Click to Preview Updated Template" color="accent">PREVIEW</button>
-                        </mat-card-actions>
-                    </mat-card>
-                    <mat-card class="tags-card">
-                        <mat-card-title>Tags</mat-card-title>
-                        <mat-card-content>
-                            <mat-list>
-                                <mat-list-item *ngFor="let tag of tags">
-                                    <button draggable [dragScope]="'default-css'" mat-raised-button color="primary">{{tag}}</button>
-                                    <mat-divider></mat-divider>
-                                </mat-list-item>
-                            </mat-list>
-                        </mat-card-content>
-                    </mat-card>
-                </div>  
-            </mat-card>
-        </mat-tab>
-        <mat-tab label="Preview">
-            <mat-card>Preview</mat-card>
-        </mat-tab> 
+<mat-tab-group [selectedIndex]="selectedTab" mat-stretch-tabs class="mat-elevation-z0">
+  <mat-tab label="Authoring">
+    <mat-card>
+      <div class="card-container">
+        <mat-card class="template-card">
+          <mat-card-title>Template</mat-card-title>
+          <mat-card-content #docEle [innerHTML]="data" droppable contenteditable="true" (onDrop)="onItemDrop($event)" [dropScope]="'tags'"></mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-raised-button 
+            matTooltip="Click to save Updated Template" 
+            color="primary"
+            (click)="save()">SAVE</button>
+            <button 
+            mat-raised-button 
+            matTooltip="Click to Preview Updated Template" 
+            color="accent"
+            (click)="saveAndPreview()">PREVIEW</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="tags-card">
+          <mat-card-title>Tags</mat-card-title>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item *ngFor="let tag of tags">
+                <button draggable [dragData]="tag" [dragScope]="'tags'" mat-raised-button color="primary">{{tag.title}}</button>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Preview & Update">
+    <app-preview-update></app-preview-update>
+  </mat-tab>
+  <mat-tab label="Manage">
+    <mat-card>Manage</mat-card>
+  </mat-tab>
 </mat-tab-group>
