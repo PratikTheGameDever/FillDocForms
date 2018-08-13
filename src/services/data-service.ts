@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { text } from '../../node_modules/@angular/core/src/render3/instructions';
 
 @Injectable()
 export class DataService{
@@ -13,5 +12,13 @@ export class DataService{
 
     post(data: string): Observable<any> {
         return this._http.post('http://localhost:3000/api/data', {body : data});
+    }
+
+    postFinal(data: string, pdfData: string): Observable<any> {
+        return this._http.post('http://localhost:3000/api/data/final', {body: data, pdfData: pdfData});
+    }
+
+    getFinal(): Observable<any> {
+        return this._http.get('http://localhost:3000/api/data/final');
     }
 }

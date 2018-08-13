@@ -3,8 +3,9 @@
     <mat-card-title>Template</mat-card-title>
     <mat-card-content #docEle [innerHTML]="data"></mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button matTooltip="Click to save Updated Template" color="primary">SAVE</button>
-      <button mat-raised-button matTooltip="Click to Preview Updated Template" color="accent">PREVIEW</button>
+      <button mat-raised-button 
+      matTooltip="Click to save Updated Template" color="primary"
+      (click)="saveFinalData()">SAVE</button>
     </mat-card-actions>
   </mat-card>
   <mat-card class="tags-card">

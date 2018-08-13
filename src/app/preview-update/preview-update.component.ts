@@ -61,4 +61,11 @@ export class PreviewUpdateComponent implements OnInit {
     return this.docEle.getElementsByClassName('3DWordSection1')[0].innerHTML;
   }
 
+  saveFinalData(){
+    this.docEle.getElementsByClassName('3DWordSection1')[0].innerHTML = this.templateEle.nativeElement.innerHTML;
+    this.service.postFinal(this.docEle.outerHTML, this.templateEle.nativeElement.innerHTML).subscribe( res => {
+      this.service.getFinal().subscribe();
+    });
+  }
+
 }
