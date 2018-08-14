@@ -4,7 +4,34 @@ const bodyParser = require('body-parser')
 const fs = require('fs')
 var pdf = require('html-pdf');
 
-const app = express()
+const app = express();
+
+tags = [
+  {key: 'staddr', title: 'St. Address', tag: '<span id="staddr">@@St.Addr.@@</span>', type: 'text', value: ''},
+  {key: 'city', title: 'City', tag: '<span id="city">@@city@@</span>', type: 'select',
+    options: [
+      'Manchester',
+      'Hartford',
+      'New Haven',
+      'Boston',
+      'New York'
+    ], value: ''
+  },
+  {key: 'state', title: 'State', tag: '<span id="state">@@State@@</span>', type: 'select',
+    options: [
+      'CT',
+      'MA',
+      'WY',
+      'NY',
+      'ID'
+    ], value: ''
+  },
+  {key: 'zipcode', title: 'Zip Code', tag: '<span id="zipcode">@@Zip Code@@</span>', type: 'text', value: ''},
+  {key: 'telnum', title : 'Tel. Number', tag: '<span id="telnum">@@Tel. Number@@</span>', type: 'text', value: '' },
+  {key: 'email', title : 'Email Addr.', tag: '<span id="email">@@Email Addr.@@</span>', type: 'text', value: ''},
+  {key: 'title', title : 'Title', tag: '<span id="title">@@Title@@</span>', type: 'text', value: ''},
+  {key: 'para', title : 'Paragraph', tag: '< span id="para">@@Paragraph@@</span>', type: 'textarea', value: ''}
+];
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
@@ -37,6 +64,11 @@ app.post('/api/data/final', (req, res, next) => {
 app.get('/api/data/final', (req, res, next) => {
   res.download('data.pdf', 'data.pdf');
 });
+
+app.get('/api/tags', (req, res, next) => {
+  res.send(JSON.stringify(tags));
+});
+
 app.listen(process.env.PORT, (err) => {
   if (err) {
     console.error('Unable to listen for connection', err);

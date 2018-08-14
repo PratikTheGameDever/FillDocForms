@@ -1050,10 +1050,10 @@ div.WordSection1
 
 <div class="3DWordSection1">
 
-<span><span id="staddr">@@St.Addr.@@</span></span><br>
-<span><span id="city">@@city@@</span></span>, <span><span id="state">@@State@@</span></span> <span><span id="zipcode">@@Zip Code@@</span></span><br>
-<span><span id="telnum">@@Tel. Number@@</span></span><br>
-<span><span id="email">@@Email Addr.@@</span></span><br>
+<span>Your Street Address</span><br>
+<span><span id="city">@@city@@</span></span>, <span>State</span> <span>Zip Code</span><br>
+<span>Telephone Number</span><br>
+<span>Email Address</span><br>
 <br>
 <span class="3DMsoNormal">08, 11, 2018</span>
 
