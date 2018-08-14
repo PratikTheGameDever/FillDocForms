@@ -14,6 +14,10 @@ export class DataService{
         return this._http.post('http://localhost:3000/api/data', {body : data});
     }
 
+    getTags() : Observable<any> {
+        return this._http.get('http://localhost:3000/api/tags');
+    }
+
     postFinal(data: string, pdfData: string): Observable<any> {
         return this._http.post('http://localhost:3000/api/data/final', {body: data, pdfData: pdfData});
     }
